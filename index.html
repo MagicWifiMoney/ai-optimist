@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The AI Optimist — AI for Good, Built in Minnesota</title>
+  <meta name="description" content="We believe AI is the great equalizer. Free websites for nonprofits, charities, and small businesses. Minnesota-grown, community-first.">
+  <meta name="keywords" content="AI, artificial intelligence, nonprofits, free websites, Minnesota, community, charity, AI for good">
+  <meta name="author" content="The AI Optimist">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The AI Optimist — AI for Good, Built in Minnesota">
+  <meta property="og:description" content="We believe AI is the great equalizer. Free websites for nonprofits, charities, and small businesses in need.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theaioptimist.com">
+  <meta property="og:image" content="https://theaioptimist.com/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The AI Optimist — AI for Good, Built in Minnesota">
+  <meta name="twitter:description" content="We believe AI is the great equalizer. Free websites for nonprofits, charities, and small businesses.">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "The AI Optimist",
+    "description": "AI for good. Free websites for nonprofits, charities, and small businesses. Minnesota-grown, community-first.",
+    "url": "https://theaioptimist.com",
+    "areaServed": "Minnesota",
+    "foundingLocation": "Minneapolis, MN"
+  }
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌅</text></svg>">
+
+  <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      /* Base palette (dark theme) */
+      --bg-deep: #06060c;
+      --bg-surface: #0e0e1a;
+      --bg-card: #141425;
+      --bg-card-hover: #1a1a30;
+      --text-primary: #f0f0f8;
+      --text-secondary: #9898b8;
+      --text-muted: #5a5a7a;
+
+      /* Daily theme — set by JS */
+      --primary: #00e87b;
+      --secondary: #7b2ff7;
+      --accent: #00d4ff;
+      --glow: rgba(0, 232, 123, 0.25);
+      --gradient-start: #00e87b;
+      --gradient-end: #7b2ff7;
+      --particle-color: 0, 232, 123;
+
+      /* Layout */
+      --max-width: 1200px;
+      --section-padding: 120px 24px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--primary); text-decoration: none; transition: color 0.3s; }
+    a:hover { color: var(--accent); }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s, backdrop-filter 0.4s, padding 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(6, 6, 12, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 12px 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--primary), var(--secondary)) !important;
+      -webkit-background-clip: unset !important;
+      -webkit-text-fill-color: unset !important;
+      background-clip: unset !important;
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: transform 0.3s, box-shadow 0.3s !important;
+    }
+
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px var(--glow); }
+
+    /* ============================================
+       HERO
+       ============================================ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #neural-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .hero-gradient-mesh {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .mesh-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.15;
+      animation: meshFloat 20s ease-in-out infinite;
+    }
+
+    .mesh-blob:nth-child(1) {
+      width: 600px;
+      height: 600px;
+      background: var(--primary);
+      top: -10%;
+      left: -10%;
+      animation-delay: 0s;
+    }
+
+    .mesh-blob:nth-child(2) {
+      width: 500px;
+      height: 500px;
+      background: var(--secondary);
+      bottom: -10%;
+      right: -10%;
+      animation-delay: -7s;
+    }
+
+    .mesh-blob:nth-child(3) {
+      width: 400px;
+      height: 400px;
+      background: var(--accent);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+    }
+
+    @keyframes meshFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -30px) scale(1.1); }
+      50% { transform: translate(-30px, 50px) scale(0.95); }
+      75% { transform: translate(40px, 30px) scale(1.05); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 820px;
+      padding: 0 24px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.03);
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .hero-badge span { color: var(--primary); font-weight: 600; }
+
+    .hero-typing-container {
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    .hero-typing {
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 50%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background: var(--primary);
+      margin-left: 4px;
+      vertical-align: text-bottom;
+      animation: cursorBlink 1s step-end infinite;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 1s ease 0.6s both;
+    }
+
+    .hero-form {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto 32px;
+      animation: fadeInUp 1s ease 0.8s both;
+    }
+
+    .hero-form input[type="email"] {
+      flex: 1;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .hero-form input[type="email"]::placeholder { color: var(--text-muted); }
+
+    .hero-form input[type="email"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    .hero-form button {
+      padding: 14px 28px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      white-space: nowrap;
+    }
+
+    .hero-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--glow);
+    }
+
+    .hero-social-proof {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      animation: fadeInUp 1s ease 1s both;
+    }
+
+    .hero-social-proof strong { color: var(--primary); }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .scroll-indicator svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--text-muted);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ============================================
+       GENERAL SECTION STYLES
+       ============================================ */
+    section { padding: var(--section-padding); position: relative; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================
+       MISSION SECTION
+       ============================================ */
+    #mission {
+      background: var(--bg-surface);
+      border-top: 1px solid rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .mission-statement {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.4;
+      margin-bottom: 64px;
+      max-width: 700px;
+    }
+
+    .mission-statement em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .pillar {
+      padding: 40px 32px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px;
+      transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+    }
+
+    .pillar:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .pillar-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .pillar h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .pillar p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       IMPACT COUNTERS
+       ============================================ */
+    #impact {
+      text-align: center;
+      background: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #impact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    .counters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .counter-item {
+      padding: 20px;
+    }
+
+    .counter-number {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .counter-label {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ============================================
+       HOW IT WORKS
+       ============================================ */
+    #how-it-works {
+      background: var(--bg-surface);
+      border-top: 1px solid rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0;
+      max-width: 1000px;
+      margin: 60px auto 0;
+      position: relative;
+    }
+
+    .step {
+      text-align: center;
+      padding: 40px 32px;
+      position: relative;
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .step-connector {
+      display: none;
+      position: absolute;
+      top: 68px;
+      right: -20px;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), transparent);
+      z-index: 1;
+    }
+
+    @media (min-width: 860px) {
+      .step-connector { display: block; }
+      .step:last-child .step-connector { display: none; }
+    }
+
+    .step h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* ============================================
+       NEWSLETTER
+       ============================================ */
+    #newsletter {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #newsletter::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-surface) 50%, var(--bg-deep) 100%);
+      z-index: 0;
+    }
+
+    .newsletter-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .newsletter-content .section-title {
+      margin-bottom: 12px;
+    }
+
+    .newsletter-tagline {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto 20px;
+    }
+
+    .newsletter-form input[type="email"] {
+      flex: 1;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .newsletter-form input[type="email"]::placeholder { color: var(--text-muted); }
+    .newsletter-form input[type="email"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    .newsletter-form button {
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      white-space: nowrap;
+    }
+
+    .newsletter-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--glow);
+    }
+
+    .newsletter-proof {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .newsletter-proof strong { color: var(--primary); }
+
+    /* ============================================
+       BLOG / LATEST
+       ============================================ */
+    #latest {
+      background: var(--bg-surface);
+      border-top: 1px solid rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px;
+      padding: 32px;
+      transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      perspective: 800px;
+    }
+
+    .blog-card:hover {
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .blog-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.05);
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .blog-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+    }
+
+    .blog-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .blog-card .read-more {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.3s;
+    }
+
+    .blog-card:hover .read-more { gap: 10px; }
+
+    /* ============================================
+       ABOUT / MINNESOTA
+       ============================================ */
+    #about {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mn-outline {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.03;
+      z-index: 0;
+    }
+
+    .about-content {
+      position: relative;
+      z-index: 1;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .about-content .section-title {
+      margin-bottom: 24px;
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .mn-values {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .mn-value {
+      padding: 8px 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .mn-value:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* ============================================
+       GLITCH EFFECT
+       ============================================ */
+    .glitch {
+      position: relative;
+      display: inline-block;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-deep);
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 var(--primary);
+      clip-path: inset(0 0 0 0);
+      animation: glitchTop 4s ease-in-out infinite;
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: 2px 0 var(--secondary);
+      clip-path: inset(0 0 0 0);
+      animation: glitchBottom 4s ease-in-out infinite;
+    }
+
+    @keyframes glitchTop {
+      0%, 90%, 100% { clip-path: inset(0 0 100% 0); }
+      92% { clip-path: inset(20% 0 40% 0); transform: translateX(-4px); }
+      94% { clip-path: inset(60% 0 10% 0); transform: translateX(4px); }
+      96% { clip-path: inset(0 0 100% 0); }
+    }
+
+    @keyframes glitchBottom {
+      0%, 90%, 100% { clip-path: inset(100% 0 0 0); }
+      93% { clip-path: inset(40% 0 20% 0); transform: translateX(4px); }
+      95% { clip-path: inset(10% 0 60% 0); transform: translateX(-4px); }
+      97% { clip-path: inset(100% 0 0 0); }
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      background: var(--bg-surface);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 80px 24px 40px;
+    }
+
+    .footer-grid {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-top: 12px;
+      max-width: 300px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul { list-style: none; }
+
+    .footer-col li { margin-bottom: 12px; }
+
+    .footer-col a {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .footer-col a:hover { color: var(--primary); }
+
+    .footer-newsletter {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 40px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+
+    .footer-newsletter h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .footer-newsletter p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .footer-newsletter-form {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .footer-newsletter-form input[type="email"] {
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      outline: none;
+      width: 240px;
+      transition: border-color 0.3s;
+    }
+
+    .footer-newsletter-form input:focus { border-color: var(--primary); }
+    .footer-newsletter-form input::placeholder { color: var(--text-muted); }
+
+    .footer-newsletter-form button {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .footer-newsletter-form button:hover { transform: translateY(-1px); }
+
+    .footer-bottom {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-bottom p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ============================================
+       MOBILE RESPONSIVE
+       ============================================ */
+    @media (max-width: 768px) {
+      :root { --section-padding: 80px 20px; }
+
+      .nav-links a:not(.nav-cta) { display: none; }
+
+      .hero-typing-container { min-height: 120px; }
+
+      .hero-form,
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .hero-form button,
+      .newsletter-form button {
+        width: 100%;
+      }
+
+      .pillars { grid-template-columns: 1fr; }
+
+      .steps { grid-template-columns: 1fr; }
+      .step-connector { display: none !important; }
+
+      .blog-grid { grid-template-columns: 1fr; }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-newsletter {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+      }
+
+      .footer-newsletter-form {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .footer-newsletter-form input[type="email"] { width: 100%; }
+    }
+
+    /* ============================================
+       REDUCED MOTION
+       ============================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+      .hero-cursor { animation: none; opacity: 1; }
+      .mesh-blob { animation: none; }
+      #neural-canvas { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav id="main-nav">
+    <a href="/" class="nav-logo">The AI Optimist</a>
+    <div class="nav-links">
+      <a href="#mission">Mission</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#latest">Blog</a>
+      <a href="/roadmap.html">Roadmap</a>
+      <a href="#newsletter" class="nav-cta">Subscribe</a>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section id="hero">
+    <div class="hero-gradient-mesh">
+      <div class="mesh-blob"></div>
+      <div class="mesh-blob"></div>
+      <div class="mesh-blob"></div>
+    </div>
+    <canvas id="neural-canvas"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-badge"><span>✦</span> AI for Good — Built in Minnesota</div>
+
+      <div class="hero-typing-container">
+        <h1>
+          <span class="hero-typing" id="typing-text"></span><span class="hero-cursor"></span>
+        </h1>
+      </div>
+
+      <p class="hero-subtitle">
+        Free websites for nonprofits, charities, and small businesses who need them. No catch. No cost. Just community.
+      </p>
+
+      <form class="hero-form" action="https://theaioptimist.beehiiv.com/subscribe" method="post">
+        <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+        <button type="submit">Join Us</button>
+      </form>
+
+      <p class="hero-social-proof">Join <strong>240+</strong> optimists getting the weekly newsletter</p>
+    </div>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </div>
+  </section>
+
+  <!-- ========== MISSION ========== -->
+  <section id="mission">
+    <div class="container">
+      <span class="section-label reveal">What We Believe</span>
+      <p class="mission-statement reveal reveal-delay-1">
+        We believe <em>AI is the great equalizer.</em> Not a tool for the privileged few — a force that lifts up the many. That's why we build free websites for organizations doing real good in the world.
+      </p>
+
+      <div class="pillars">
+        <div class="pillar reveal reveal-delay-1">
+          <span class="pillar-icon">🏗️</span>
+          <h3>Free Websites</h3>
+          <p>Nonprofits, charities, and small businesses in need get professional websites built with AI — completely free. Your mission matters more than your budget.</p>
+        </div>
+        <div class="pillar reveal reveal-delay-2">
+          <span class="pillar-icon">📰</span>
+          <h3>Honest AI Coverage</h3>
+          <p>No hype. No doom. Just the truth about what AI can do for real people. We cut through the noise to show what actually works.</p>
+        </div>
+        <div class="pillar reveal reveal-delay-3">
+          <span class="pillar-icon">🤝</span>
+          <h3>Community First</h3>
+          <p>Minnesota values with global impact. We believe in showing up for your neighbors — and using technology to do it at scale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== IMPACT COUNTERS ========== -->
+  <section id="impact">
+    <div class="container" style="text-align:center;">
+      <span class="section-label reveal">Our Impact</span>
+      <h2 class="section-title reveal reveal-delay-1" style="margin-bottom: 60px;">
+        Real numbers. Real people.
+      </h2>
+
+      <div class="counters">
+        <div class="counter-item reveal reveal-delay-1">
+          <div class="counter-number" data-target="3">0</div>
+          <div class="counter-label">Sites Built</div>
+        </div>
+        <div class="counter-item reveal reveal-delay-2">
+          <div class="counter-number" data-target="47">0</div>
+          <div class="counter-label">People Helped</div>
+        </div>
+        <div class="counter-item reveal reveal-delay-3">
+          <div class="counter-number" data-target="120">0</div>
+          <div class="counter-label">Hours Donated</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section id="how-it-works">
+    <div class="container" style="text-align:center;">
+      <span class="section-label reveal">How It Works</span>
+      <h2 class="section-title reveal reveal-delay-1">
+        From zero to website.<br>
+        <span class="glitch" data-text="Powered by AI.">Powered by AI.</span>
+      </h2>
+      <p class="section-subtitle reveal reveal-delay-2" style="margin: 0 auto;">
+        Getting a free website for your nonprofit or charity is simple. We handle the tech so you can focus on your mission.
+      </p>
+
+      <div class="steps">
+        <div class="step reveal reveal-delay-1">
+          <div class="step-number">1</div>
+          <div class="step-connector"></div>
+          <h3>Tell Us Your Story</h3>
+          <p>Share your organization's mission, who you help, and what you need. A simple form — no jargon, no tech speak.</p>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-number">2</div>
+          <div class="step-connector"></div>
+          <h3>We Build With AI</h3>
+          <p>Our team uses AI tools to design and build your site fast. Professional quality, zero cost to you.</p>
+        </div>
+        <div class="step reveal reveal-delay-3">
+          <div class="step-number">3</div>
+          <h3>You Change the World</h3>
+          <p>Focus on your mission while we handle the tech. Updates, hosting help, and ongoing support — all free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NEWSLETTER ========== -->
+  <section id="newsletter">
+    <div class="newsletter-content">
+      <span class="section-label reveal">Newsletter</span>
+      <h2 class="section-title reveal reveal-delay-1">Get the optimistic take on AI.</h2>
+      <p class="newsletter-tagline reveal reveal-delay-2">
+        While everyone else is panicking about AI, we're building with it. Weekly stories of real people using AI for real good.
+      </p>
+
+      <form class="newsletter-form reveal reveal-delay-3" action="https://theaioptimist.beehiiv.com/subscribe" method="post">
+        <input type="email" name="email" placeholder="Enter your email" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+
+      <p class="newsletter-proof reveal reveal-delay-4">
+        Join <strong>240+</strong> optimists · Free forever · Unsubscribe anytime
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== LATEST FROM THE OPTIMIST ========== -->
+  <section id="latest">
+    <div class="container">
+      <span class="section-label reveal">Latest from the Optimist</span>
+      <h2 class="section-title reveal reveal-delay-1">Stories that prove AI is good.</h2>
+
+      <div class="blog-grid">
+        <article class="blog-card reveal reveal-delay-1">
+          <span class="blog-tag">Case Study</span>
+          <h3>How We Built a Nonprofit's Website in 2 Hours</h3>
+          <p>A local food shelf needed a website but had zero budget. Here's how AI helped us build something beautiful in an afternoon.</p>
+          <span class="read-more">Read more →</span>
+        </article>
+
+        <article class="blog-card reveal reveal-delay-2">
+          <span class="blog-tag">Tools</span>
+          <h3>5 AI Tools That Actually Help Small Businesses</h3>
+          <p>Forget the hype. These are the AI tools that real small business owners are using right now to save time and money.</p>
+          <span class="read-more">Read more →</span>
+        </article>
+
+        <article class="blog-card reveal reveal-delay-3">
+          <span class="blog-tag">Opinion</span>
+          <h3>Why Minnesota Is the Perfect Place for Ethical AI</h3>
+          <p>It's not Silicon Valley. It's better. Minnesota's community values make it the ideal place to build AI that serves everyone.</p>
+          <span class="read-more">Read more →</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT / MINNESOTA ========== -->
+  <section id="about">
+    <!-- Subtle MN state outline -->
+    <svg class="mn-outline" width="400" height="400" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.3" aria-hidden="true">
+      <path d="M15 10 L85 10 L85 15 L90 15 L90 25 L85 25 L85 30 L82 35 L80 50 L78 55 L75 58 L70 65 L65 70 L60 72 L55 75 L50 78 L45 80 L40 78 L35 75 L30 72 L28 70 L25 65 L22 60 L20 55 L18 50 L15 40 L15 10Z"/>
+    </svg>
+
+    <div class="about-content">
+      <span class="section-label reveal">Our Roots</span>
+      <h2 class="section-title reveal reveal-delay-1">
+        Built in Minneapolis.<br>Powered by optimism.
+      </h2>
+      <p class="about-text reveal reveal-delay-2">
+        We're not another Silicon Valley startup chasing hype. We're a Minnesota-grown team that believes technology should serve the community — not the other way around. From the land of 10,000 lakes, northern lights, and neighbors who actually help each other.
+      </p>
+      <p class="about-text reveal reveal-delay-3">
+        Every free website we build is proof that AI can be a force for good. No strings attached. No ulterior motives. Just Minnesota nice, amplified by technology.
+      </p>
+
+      <div class="mn-values reveal reveal-delay-4">
+        <span class="mn-value">Community First</span>
+        <span class="mn-value">Land of 10,000 Lakes</span>
+        <span class="mn-value">Northern Lights</span>
+        <span class="mn-value">Minnesota Nice</span>
+        <span class="mn-value">Honest Work</span>
+        <span class="mn-value">Global Impact</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-newsletter">
+      <div>
+        <h3>Never miss the optimistic take.</h3>
+        <p>AI news that doesn't make you want to hide under a rock.</p>
+      </div>
+      <form class="footer-newsletter-form" action="https://theaioptimist.beehiiv.com/subscribe" method="post">
+        <input type="email" name="email" placeholder="Your email" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo" style="font-size:1.1rem;">The AI Optimist</a>
+        <p>AI for good. Free websites for nonprofits, charities, and small businesses. Minnesota-grown, community-first.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#mission">Mission</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#latest">Blog</a></li>
+          <li><a href="/roadmap.html">Roadmap</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">Twitter / X</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">YouTube</a></li>
+          <li><a href="mailto:hello@theaioptimist.com">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Made with AI and ❤️ in Minnesota · &copy; 2025 The AI Optimist</p>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    /* ============================================
+       DAILY COLOR THEME SYSTEM
+       ============================================ */
+    (function setDailyTheme() {
+      const themes = [
+        { // Sunday — peaceful sky blues
+          primary: '#5b9bd5', secondary: '#87ceeb', accent: '#b8d4e3',
+          glow: 'rgba(91,155,213,0.25)', particle: '91,155,213',
+          gradStart: '#5b9bd5', gradEnd: '#87ceeb'
+        },
+        { // Monday — aurora borealis greens/purples
+          primary: '#00e87b', secondary: '#7b2ff7', accent: '#00d4ff',
+          glow: 'rgba(0,232,123,0.25)', particle: '0,232,123',
+          gradStart: '#00e87b', gradEnd: '#7b2ff7'
+        },
+        { // Tuesday — warm sunrise golds
+          primary: '#ff9500', secondary: '#ffb700', accent: '#ff6b35',
+          glow: 'rgba(255,149,0,0.25)', particle: '255,149,0',
+          gradStart: '#ff9500', gradEnd: '#ff6b35'
+        },
+        { // Wednesday — deep lake blues
+          primary: '#0088ff', secondary: '#00b4d8', accent: '#48cae4',
+          glow: 'rgba(0,136,255,0.25)', particle: '0,136,255',
+          gradStart: '#0088ff', gradEnd: '#00b4d8'
+        },
+        { // Thursday — forest greens/earth tones
+          primary: '#34a853', secondary: '#8bc34a', accent: '#cddc39',
+          glow: 'rgba(52,168,83,0.25)', particle: '52,168,83',
+          gradStart: '#34a853', gradEnd: '#8bc34a'
+        },
+        { // Friday — electric purples/pinks
+          primary: '#ff006e', secondary: '#8338ec', accent: '#fb5607',
+          glow: 'rgba(255,0,110,0.25)', particle: '255,0,110',
+          gradStart: '#ff006e', gradEnd: '#8338ec'
+        },
+        { // Saturday — warm community oranges/reds
+          primary: '#ff4500', secondary: '#ff6b35', accent: '#ffd166',
+          glow: 'rgba(255,69,0,0.25)', particle: '255,69,0',
+          gradStart: '#ff4500', gradEnd: '#ff6b35'
+        }
+      ];
+
+      const day = new Date().getDay();
+      const t = themes[day];
+      const r = document.documentElement.style;
+      r.setProperty('--primary', t.primary);
+      r.setProperty('--secondary', t.secondary);
+      r.setProperty('--accent', t.accent);
+      r.setProperty('--glow', t.glow);
+      r.setProperty('--particle-color', t.particle);
+      r.setProperty('--gradient-start', t.gradStart);
+      r.setProperty('--gradient-end', t.gradEnd);
+    })();
+
+    /* ============================================
+       NEURAL NETWORK CANVAS
+       ============================================ */
+    (function initCanvas() {
+      const canvas = document.getElementById('neural-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width, height, particles, mouse, animId;
+      const isMobile = window.innerWidth < 768;
+      const PARTICLE_COUNT = isMobile ? 40 : 90;
+      const CONNECTION_DIST = isMobile ? 120 : 160;
+      const MOUSE_RADIUS = 200;
+
+      mouse = { x: -1000, y: -1000 };
+
+      function resize() {
+        width = canvas.width = canvas.offsetWidth;
+        height = canvas.height = canvas.offsetHeight;
+      }
+
+      function createParticles() {
+        particles = [];
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            radius: Math.random() * 2 + 1
+          });
+        }
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        const pc = getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim();
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+
+          // Move
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Mouse attraction
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MOUSE_RADIUS) {
+            p.vx += dx * 0.00008;
+            p.vy += dy * 0.00008;
+          }
+
+          // Damping
+          p.vx *= 0.999;
+          p.vy *= 0.999;
+
+          // Wrap
+          if (p.x < -10) p.x = width + 10;
+          if (p.x > width + 10) p.x = -10;
+          if (p.y < -10) p.y = height + 10;
+          if (p.y > height + 10) p.y = -10;
+
+          // Draw particle
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + pc + ',0.6)';
+          ctx.fill();
+
+          // Draw connections
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const cdx = p.x - p2.x;
+            const cdy = p.y - p2.y;
+            const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+
+            if (cdist < CONNECTION_DIST) {
+              const alpha = (1 - cdist / CONNECTION_DIST) * 0.3;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = 'rgba(' + pc + ',' + alpha + ')';
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+
+        animId = requestAnimationFrame(animate);
+      }
+
+      // Events
+      window.addEventListener('resize', function() {
+        resize();
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+
+      document.addEventListener('mouseleave', function() {
+        mouse.x = -1000;
+        mouse.y = -1000;
+      });
+
+      resize();
+      createParticles();
+      animate();
+
+      // Check reduced motion
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        cancelAnimationFrame(animId);
+      }
+    })();
+
+    /* ============================================
+       TYPING EFFECT
+       ============================================ */
+    (function initTyping() {
+      const messages = [
+        "AI should help everyone.",
+        "Not just the ones who can afford it.",
+        "We build free websites for those who need them.",
+        "Minnesota-grown. Community-first.",
+        "The future is optimistic."
+      ];
+
+      const el = document.getElementById('typing-text');
+      if (!el) return;
+
+      let msgIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function type() {
+        const current = messages[msgIndex];
+
+        if (isDeleting) {
+          el.textContent = current.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          el.textContent = current.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let delay = isDeleting ? 25 : 45 + Math.random() * 40;
+
+        if (!isDeleting && charIndex === current.length) {
+          delay = 2200;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          msgIndex = (msgIndex + 1) % messages.length;
+          delay = 400;
+        }
+
+        setTimeout(type, delay);
+      }
+
+      // Start after a brief delay
+      setTimeout(type, 800);
+    })();
+
+    /* ============================================
+       SCROLL REVEAL (Intersection Observer)
+       ============================================ */
+    (function initScrollReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      if (!reveals.length) return;
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+      reveals.forEach(function(el) { observer.observe(el); });
+    })();
+
+    /* ============================================
+       COUNTER ANIMATION
+       ============================================ */
+    (function initCounters() {
+      const counters = document.querySelectorAll('.counter-number');
+      if (!counters.length) return;
+      let animated = false;
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !animated) {
+            animated = true;
+            counters.forEach(function(counter) {
+              const target = parseInt(counter.getAttribute('data-target'), 10);
+              const duration = 2000;
+              const start = performance.now();
+
+              function update(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease out cubic
+                const eased = 1 - Math.pow(1 - progress, 3);
+                counter.textContent = Math.floor(eased * target);
+                if (progress < 1) {
+                  requestAnimationFrame(update);
+                } else {
+                  counter.textContent = target;
+                }
+              }
+
+              requestAnimationFrame(update);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+
+      observer.observe(document.getElementById('impact'));
+    })();
+
+    /* ============================================
+       NAVBAR SCROLL
+       ============================================ */
+    (function initNavScroll() {
+      const nav = document.getElementById('main-nav');
+      if (!nav) return;
+
+      let ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            if (window.scrollY > 60) {
+              nav.classList.add('scrolled');
+            } else {
+              nav.classList.remove('scrolled');
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
+
+    /* ============================================
+       3D CARD TILT
+       ============================================ */
+    (function initCardTilt() {
+      const cards = document.querySelectorAll('.blog-card');
+
+      cards.forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -6;
+          const rotateY = ((x - centerX) / centerX) * 6;
+
+          card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-4px)';
+        });
+
+        card.addEventListener('mouseleave', function() {
+          card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
+        });
+      });
+    })();
+
+    /* ============================================
+       HERO MOUSE FOLLOW (subtle parallax)
+       ============================================ */
+    (function initMouseFollow() {
+      const hero = document.getElementById('hero');
+      const content = document.querySelector('.hero-content');
+      if (!hero || !content) return;
+
+      hero.addEventListener('mousemove', function(e) {
+        const rect = hero.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+        const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+
+        content.style.transform = 'translate(' + (x * -8) + 'px, ' + (y * -8) + 'px)';
+      });
+
+      hero.addEventListener('mouseleave', function() {
+        content.style.transform = 'translate(0, 0)';
+      });
+    })();
+
+    /* ============================================
+       SMOOTH SCROLL FOR NAV LINKS
+       ============================================ */
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
